@@ -1,155 +1,142 @@
-# README
+# Autodialer (Ruby on Rails)
 
-Autodialer (Ruby on Rails)
-
-Autodialer is a Ruby on Rails application that allows you to upload phone numbers, automatically call them using Twilio Voice API, play a custom voice message, and track call logs.
+Autodialer is a Ruby on Rails application that allows you to upload phone numbers, automatically call them using the Twilio Voice API, play a custom voice message, and track call logs.
 The application also supports AI-based calling prompts and uses TailwindCSS for UI styling.
 
-Features
+## Features
 
-Upload multiple phone numbers (one per line)
+- Upload multiple phone numbers (one per line)
+- Auto-dial all contacts using Twilio
+- Play custom text-to-speech messages
+- AI command support (example: `call +919876543210 saying hello`)
+- Call logs with status, duration, SID, and error messages
+- Twilio webhook integration for live call status updates
+- TailwindCSS-based UI
+- Ngrok support for local development
+- Supports `.env` environment configuration
 
-Auto-dial all contacts using Twilio
+## Requirements
 
-Play custom text-to-speech messages
+- Ruby 3.2+ or 3.4+
+- Rails 8+
+- Bundler
+- Twilio account
+- Ngrok (for local webhook testing)
 
-AI command support (example: “call +919876543210 saying hello”)
+## Installation
 
-Call logs with status, duration, SID, and error messages
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/your-username/autodialer.git
+   cd autodialer
+   ```
 
-Twilio webhook integration for live call status updates
+2. **Install gems**
+   ```sh
+   bundle install
+   ```
 
-TailwindCSS-based UI
+3. **Set up the database**
+   ```sh
+   rails db:create
+   rails db:migrate
+   ```
 
-Ngrok support for local development
+4. **Set environment variables**
 
-Supports .env environment configuration
+   Create a `.env` file with the following content:
 
-Requirements
+   ```
+   TWILIO_ACCOUNT_SID=your_account_sid
+   TWILIO_AUTH_TOKEN=your_auth_token
+   TWILIO_NUMBER=your_twilio_phone_number
+   NGROK_URL=your_ngrok_domain.ngrok-free.dev
+   OPENAI_API_KEY=your_api_key
+   ```
 
-Ruby 3.2+ or 3.4
+5. **Run TailwindCSS watcher**
+   ```sh
+   rails tailwindcss:watch
+   ```
+   (Keep this running in a separate terminal)
 
-Rails 8+
+6. **Start the Rails server**
+   ```sh
+   ruby bin/rails server
+   ```
 
-Bundler
+   The server will run at: [http://localhost:3000](http://localhost:3000)
 
-Twilio account
+## Ngrok Setup
 
-Ngrok (for local webhook testing)
+1. Navigate to your ngrok folder:
+   ```sh
+   cd C:\ngrok-v3-stable-windows-amd64
+   ```
 
-Installation
-1. Clone the repository
-git clone https://github.com/your-username/autodialer.git
-cd autodialer
+2. Run ngrok:
+   ```sh
+   .\ngrok http 3000
+   ```
 
-2. Install gems
-bundle install
+3. Copy the generated domain and update your `.env` file:
+   ```
+   NGROK_URL=example-domain.ngrok-free.dev
+   ```
 
-3. Set up the database
-rails db:create
-rails db:migrate
+## Twilio Setup
 
-4. Set environment variables
+1. Open Twilio Console → Manage Numbers → Active Numbers → Configure.
 
-Create a .env file:
+2. Set the following:
 
-TWILIO_ACCOUNT_SID=your_account_sid
-TWILIO_AUTH_TOKEN=your_auth_token
-TWILIO_NUMBER=your_twilio_phone_number
-NGROK_URL=your_ngrok_domain.ngrok-free.dev
-OPENAI_API_KEY=your_api_key
+   - **Voice webhook URL**
+     ```
+     https://YOUR_NGROK_URL/twilio/voice
+     ```
+   - **Status callback URL**
+     ```
+     https://YOUR_NGROK_URL/twilio/status
+     ```
 
-5. Run TailwindCSS watcher
-rails tailwindcss:watch
+3. Save the configuration.
 
+## Running Autodialer
 
-(Keep this running in a separate terminal)
+1. Start TailwindCSS:
+   ```sh
+   rails tailwindcss:watch
+   ```
 
-6. Start Rails server
-ruby bin/rails server
+2. Start Rails:
+   ```sh
+   ruby bin/rails server
+   ```
 
+3. Open the app in your browser:
+   [http://localhost:3000](http://localhost:3000)
 
-Server will run at:
-
-http://localhost:3000
-
-Ngrok Setup
-
-Navigate to your ngrok folder:
-
-cd C:\ngrok-v3-stable-windows-amd64
-
-
-Run:
-
-.\ngrok http 3000
-
-
-Copy the generated domain and update your .env:
-
-NGROK_URL=example-domain.ngrok-free.dev
-
-Twilio Setup
-
-Open Twilio Console → Manage Numbers → Active Numbers → Configure.
-
-Set:
-
-Voice webhook URL
-
-https://YOUR_NGROK_URL/twilio/voice
-
-
-Status callback URL
-
-https://YOUR_NGROK_URL/twilio/status
-
-
-Save configuration.
-
-Running Autodialer
-
-Start Tailwind:
-
-rails tailwindcss:watch
-
-
-Start Rails:
-
-ruby bin/rails server
-
-
-Open the app:
-
-http://localhost:3000
-
-
-Use ngrok:
-
-.\ngrok http 3000
-
+4. (If required) Use ngrok:
+   ```sh
+   .\ngrok http 3000
+   ```
 
 You can now receive Twilio calls on your personal phone (if verified under a trial account).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
 
-Things you may want to cover:
+## Additional Notes
 
-* Ruby version
+This README covers the necessary steps to get the application up and running.
 
-* System dependencies
+You may also want to document:
 
-* Configuration
+- Ruby version
+- System dependencies
+- Configuration
+- Database creation and initialization
+- How to run the test suite
+- Services (job queues, cache servers, search engines, etc.)
+- Deployment instructions
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Feel free to expand on these as needed for your application's requirements.
