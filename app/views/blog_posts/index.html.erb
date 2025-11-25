@@ -1,0 +1,17 @@
+<div class="flex items-center justify-between mb-4">
+  <h1 class="text-xl font-semibold">Blog</h1>
+  <%= link_to "Generate via AI", new_blog_post_path, class: "text-sm px-3 py-1.5 rounded-xl bg-indigo-500 text-slate-50 hover:bg-indigo-400" %>
+</div>
+
+<ul class="space-y-3">
+  <% @blog_posts.each do |post| %>
+    <li class="bg-slate-800 rounded-2xl p-4 border border-slate-700">
+      <h2 class="text-lg font-semibold mb-1">
+        <%= link_to post.title, post, class: "hover:text-emerald-400" %>
+      </h2>
+      <p class="text-xs text-slate-400">
+        <%= truncate(post.body, length: 150) %>
+      </p>
+    </li>
+  <% end %>
+</ul>

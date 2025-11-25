@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Autodialer" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Tailwind CSS -->
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <!-- Importmap -->
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-slate-900 text-slate-100">
+
+    <!-- NAVBAR -->
+    <nav class="bg-slate-800 border-b border-slate-700 fixed top-0 w-full z-50">
+      <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+        <!-- Logo -->
+        <div class="text-xl font-bold">
+          Autodialer
+        </div>
+
+        <!-- Links -->
+        <div class="space-x-4 text-sm font-medium">
+          <%= link_to "Dialer", root_path, class: "hover:text-emerald-400" %>
+          <%= link_to "Call Logs", call_logs_path, class: "hover:text-emerald-400" %>
+          <%= link_to "Blog", blog_posts_path, class: "hover:text-emerald-400" %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 py-6 mt-24">
+      <!-- Flash messages -->
+      <% if notice %>
+        <div class="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/40 px-4 py-3 text-sm">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="mb-4 rounded-xl bg-red-500/10 border border-red-500/40 px-4 py-3 text-sm">
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <!-- Yield page content -->
+      <%= yield %>
+    </main>
+
+  </body>
+</html>

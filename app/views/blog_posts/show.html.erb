@@ -1,0 +1,6 @@
+<h1 class="text-2xl font-bold mb-2"><%= @blog_post.title %></h1>
+<p class="text-xs text-slate-400 mb-6">Created <%= @blog_post.created_at.strftime("%d %b %Y") %></p>
+
+<div class="prose prose-invert max-w-none">
+  <%= simple_format(@blog_post.body) %>
+</div>

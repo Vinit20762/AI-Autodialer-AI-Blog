@@ -1,0 +1,45 @@
+<h1 class="text-xl font-semibold mb-3">Generate Blog Articles via AI</h1>
+
+<div class="grid md:grid-cols-2 gap-6">
+  <!-- Left: titles input -->
+  <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700">
+    <h2 class="text-sm font-semibold mb-2">Enter titles + details</h2>
+    <p class="text-xs text-slate-400 mb-3">
+      Example:<br>
+      1. Introduction to Ruby on Rails – focus on MVC<br>
+      2. Understanding REST APIs in web development<br>
+      ...
+    </p>
+
+    <%= form_with url: generate_from_ai_blog_posts_path, method: :post, local: true do |f| %>
+      <%= f.text_area :titles_text,
+        rows: 10,
+        class: "w-full rounded-xl bg-slate-900 border border-slate-700 px-3 py-2 text-xs mb-3",
+        placeholder: "1. Intro to Ruby on Rails...\n2. What is REST API?..." %>
+
+      <button class="px-4 py-2 rounded-xl bg-emerald-500 text-sm font-semibold text-slate-900 hover:bg-emerald-400">
+        Generate Articles
+      </button>
+    <% end %>
+  </div>
+
+  <!-- Right: manual single post (optional) -->
+  <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700">
+    <h2 class="text-sm font-semibold mb-2">Manual single post (optional)</h2>
+
+    <%= form_with model: @blog_post, local: true do |f| %>
+      <label class="block text-xs text-slate-300 mb-1">Title</label>
+      <%= f.text_field :title,
+        class: "w-full rounded-xl bg-slate-900 border border-slate-700 px-3 py-2 text-xs mb-3" %>
+
+      <label class="block text-xs text-slate-300 mb-1">Body</label>
+      <%= f.text_area :body,
+        rows: 7,
+        class: "w-full rounded-xl bg-slate-900 border border-slate-700 px-3 py-2 text-xs mb-3" %>
+
+      <button class="px-4 py-2 rounded-xl bg-indigo-500 text-sm font-semibold text-slate-50 hover:bg-indigo-400">
+        Save Post
+      </button>
+    <% end %>
+  </div>
+</div>
